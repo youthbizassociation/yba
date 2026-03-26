@@ -32,6 +32,14 @@ body {
   overflow-x: hidden;
 }
 
+iframe,
+video,
+embed,
+object {
+  display: block;
+  max-width: 100%;
+}
+
 body::before {
   content: "";
   position: fixed;
@@ -126,12 +134,16 @@ nav {
   display: flex;
   align-items: center;
   gap: 1rem;
+  min-width: 0;
 }
 
 .nav-links {
   display: flex;
   gap: 2.5rem;
   list-style: none;
+  align-items: center;
+  flex-wrap: wrap;
+  justify-content: flex-end;
 }
 
 .nav-links a {
@@ -663,6 +675,7 @@ section {
 
 .event-info {
   flex: 1;
+  min-width: 0;
 }
 
 .event-title {
@@ -944,6 +957,7 @@ section {
 .join-form input {
   flex: 1;
   min-width: 220px;
+  width: 100%;
   background: rgba(255, 255, 255, 0.9);
   border: 1px solid transparent;
   border-radius: 100px;
@@ -1043,6 +1057,7 @@ footer {
   display: flex;
   gap: 2rem;
   flex-wrap: wrap;
+  justify-content: center;
 }
 
 .footer-links a {
@@ -1072,6 +1087,28 @@ footer {
   transform: translateY(0);
 }
 
+@media (max-width: 1200px) {
+  nav {
+    padding-left: 2rem;
+    padding-right: 2rem;
+  }
+
+  .hero {
+    padding-left: 1.5rem;
+    padding-right: 1.5rem;
+  }
+
+  .section-inner {
+    padding-left: 1.5rem;
+    padding-right: 1.5rem;
+  }
+
+  footer {
+    padding-left: 2rem;
+    padding-right: 2rem;
+  }
+}
+
 @media (max-width: 900px) {
   nav {
     padding: 1rem 1.5rem;
@@ -1091,11 +1128,45 @@ footer {
     display: none;
     width: min(320px, calc(100vw - 3rem));
     flex-direction: column;
+    align-items: stretch;
     gap: 1rem;
     padding: 1rem 1.25rem;
     border-radius: 18px;
     background: rgba(10, 22, 40, 0.96);
     border: 1px solid rgba(14, 165, 200, 0.18);
+  }
+
+  .nav-links a {
+    display: block;
+  }
+
+  .page-main {
+    padding-top: 84px;
+  }
+
+  .hero {
+    min-height: auto;
+    padding-top: 7.5rem;
+    padding-bottom: 4rem;
+  }
+
+  .page-hero {
+    min-height: 40vh;
+  }
+
+  .page-hero-inner {
+    padding-top: 2rem;
+    padding-bottom: 2rem;
+  }
+
+  .hero h1,
+  .page-hero h1 {
+    word-break: break-word;
+  }
+
+  .section-inner {
+    padding-top: 4rem;
+    padding-bottom: 4rem;
   }
 
   .nav-links.open {
@@ -1131,32 +1202,173 @@ footer {
     padding: 2.5rem 1.5rem;
   }
 
+  .event-item {
+    align-items: flex-start;
+  }
+
+  .footer-links {
+    gap: 1rem 1.25rem;
+  }
+
   footer {
     flex-direction: column;
     padding: 2rem 1.5rem;
+    text-align: center;
   }
 }
 
 @media (max-width: 600px) {
+  nav {
+    padding: 0.9rem 1rem;
+  }
+
+  .brand-mark {
+    width: 52px;
+    height: 52px;
+  }
+
+  .nav-brand {
+    font-size: 0.95rem;
+  }
+
+  .page-main {
+    padding-top: 78px;
+  }
+
+  .hero {
+    padding: 7rem 1rem 3.25rem;
+  }
+
+  .page-hero {
+    min-height: auto;
+  }
+
+  .section-inner {
+    padding: 3.25rem 1rem;
+  }
+
+  .hero-badge {
+    width: 100%;
+    justify-content: center;
+    text-align: center;
+    line-height: 1.4;
+    padding-left: 0.85rem;
+    padding-right: 0.85rem;
+  }
+
+  .hero-ctas,
+  .section-actions {
+    flex-direction: column;
+    align-items: stretch;
+  }
+
+  .hero-ctas a,
+  .section-actions a,
+  .join-form button {
+    width: 100%;
+    text-align: center;
+  }
+
   .programs-grid {
     grid-template-columns: 1fr;
   }
 
   .impact-cards {
-    grid-template-columns: 1fr 1fr;
+    grid-template-columns: 1fr;
   }
 
   .hero-stats {
     gap: 1.5rem;
+    flex-direction: column;
   }
 
   .event-item {
-    flex-wrap: wrap;
+    flex-direction: column;
+    align-items: stretch;
     gap: 1rem;
+    padding: 1.25rem;
   }
 
   .event-divider {
     display: none;
+  }
+
+  .event-date {
+    width: auto;
+    text-align: left;
+    display: flex;
+    align-items: baseline;
+    gap: 0.5rem;
+  }
+
+  .event-day {
+    font-size: 1.7rem;
+  }
+
+  .event-type {
+    align-self: flex-start;
+  }
+
+  .program-card,
+  .feature-card,
+  .testimonial-card,
+  .impact-card,
+  .faq-item,
+  .policy-block {
+    padding: 1.5rem;
+  }
+
+  .mission-visual {
+    padding: 1.5rem;
+  }
+
+  .pillar {
+    padding: 1rem;
+  }
+
+  .join-box {
+    padding: 2rem 1rem;
+    border-radius: 20px;
+  }
+
+  .join-form {
+    flex-direction: column;
+    max-width: 100%;
+  }
+
+  .join-form input {
+    min-width: 0;
+  }
+
+  .footer-logo {
+    justify-content: center;
+  }
+
+  .footer-links {
+    justify-content: center;
+    gap: 0.8rem 1rem;
+  }
+}
+
+@media (max-width: 400px) {
+  .hero h1 {
+    font-size: 2.45rem;
+  }
+
+  .page-hero h1 {
+    font-size: 2.2rem;
+  }
+
+  .join-box h2,
+  .section-title {
+    font-size: 1.85rem;
+  }
+
+  .btn-primary,
+  .btn-outline,
+  .btn-dark {
+    padding-left: 1.2rem;
+    padding-right: 1.2rem;
   }
 }
 
