@@ -1,0 +1,103 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta name="description" content="Join Youth Business Association and connect with free student-focused mentorship, workshops, panels, and business learning opportunities.">
+<meta name="theme-color" content="#0a1628">
+<title>Join YBA | Youth Business Association</title>
+<link rel="icon" type="image/png" href="images/logo-cropped.png">
+<link rel="apple-touch-icon" href="images/logo-cropped.png">
+<link rel="manifest" href="site.webmanifest">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Syne:wght@400;600;700;800&family=DM+Sans:ital,wght@0,300;0,400;0,500;1,300&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="styles.css">
+</head>
+<body data-page="join">
+<nav aria-label="Primary">
+  <a href="index.html" class="nav-logo" aria-label="Youth Business Association home">
+    <img class="brand-mark" src="images/logo-cropped.png" alt="Youth Business Association logo" width="46" height="46" decoding="async">
+    <div class="nav-brand">Youth Business<br>Association</div>
+  </a>
+  <div class="nav-actions">
+    <button class="nav-toggle" type="button" aria-expanded="false" aria-controls="primary-nav">Menu</button>
+    <ul class="nav-links" id="primary-nav">
+      <li><a href="about.html">About</a></li>
+      <li><a href="programs.html">Programs</a></li>
+      <li><a href="events.html">Events</a></li>
+      <li><a href="impact.html">Impact</a></li>
+      <li><a href="join.html" class="nav-cta">Join Us</a></li>
+    </ul>
+  </div>
+</nav>
+
+<main id="main-content" class="page-main">
+  <section class="page-hero">
+    <div class="hero-grid" aria-hidden="true"></div>
+    <div class="section-inner page-hero-inner">
+      <div class="hero-badge"><span aria-hidden="true"></span> Join Youth Business Association</div>
+      <h1>Start building your business future with us.</h1>
+      <p>Membership is free and designed for students who want to learn, grow, connect with mentors, and explore what is possible.</p>
+    </div>
+  </section>
+
+  <section>
+    <div class="section-inner">
+      <div class="feature-grid">
+        <article class="feature-card reveal">
+          <h3>Free membership</h3>
+          <p>Students can participate without cost, making it easier to access professional learning and support.</p>
+        </article>
+        <article class="feature-card reveal">
+          <h3>Relevant opportunities</h3>
+          <p>Members hear about workshops, panels, and networking experiences designed specifically for young leaders.</p>
+        </article>
+        <article class="feature-card reveal">
+          <h3>Supportive community</h3>
+          <p>YBA connects students with peers, mentors, and professionals who encourage growth and initiative.</p>
+        </article>
+      </div>
+    </div>
+  </section>
+
+  <section class="join">
+    <div class="section-inner">
+      <div class="join-box">
+        <h2>Ready to Start Your Business Journey?</h2>
+        <p>Join hundreds of students already building skills, making connections, and discovering their potential. Membership is completely free.</p>
+        <form class="join-form" id="join-form" novalidate>
+          <label class="sr-only" for="join-email">Email address</label>
+          <input type="email" placeholder="Enter your email address" id="join-email" name="email" autocomplete="email" required aria-describedby="join-status">
+          <button type="submit" class="btn-dark">Join for Free &rarr;</button>
+        </form>
+        <div class="join-status" id="join-status" role="status" aria-live="polite"></div>
+      </div>
+    </div>
+  </section>
+</main>
+
+<footer>
+  <div class="footer-logo">
+    <img src="images/logo-cropped.png" alt="Youth Business Association logo" width="36" height="36" decoding="async">
+    <div class="footer-brand">Youth Business Association</div>
+  </div>
+  <div class="footer-links">
+    <a href="about.html">About</a>
+    <a href="programs.html">Programs</a>
+    <a href="events.html">Events</a>
+    <a href="impact.html">Impact</a>
+    <a href="join.html">Join</a>
+    <a href="get-involved.html">Get Involved</a>
+    <a href="faq.html">FAQ</a>
+    <a href="privacy.html">Privacy</a>
+    <a href="https://www.instagram.com/youth_business.a" target="_blank" rel="noopener noreferrer">Instagram</a>
+  </div>
+  <div class="footer-copy"><span id="copyright-year">2026</span> Youth Business Association &middot; Nonprofit 501(c)(3)</div>
+</footer>
+
+<script src="https://cdn.jsdelivr.net/npm/@emailjs/browser@4/dist/email.min.js"></script>
+<script src="scripts/email-config.js"></script>
+<script src="scripts/main.js" defer></script>
+</body>
+</html>
