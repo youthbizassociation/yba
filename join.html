@@ -68,7 +68,11 @@
         <p>Join hundreds of students already building skills, making connections, and discovering their potential. Membership is completely free.</p>
         <form class="join-form" id="join-form" novalidate>
           <label class="sr-only" for="join-email">Email address</label>
-          <input type="email" placeholder="Enter your email address" id="join-email" name="email" autocomplete="email" required aria-describedby="join-status">
+          <input type="email" placeholder="Enter your email address" id="join-email" name="email" autocomplete="email" required aria-describedby="join-status join-recaptcha-help">
+          <div class="join-recaptcha-wrap">
+            <div id="join-recaptcha" class="join-recaptcha" aria-describedby="join-recaptcha-help"></div>
+            <p class="join-recaptcha-help" id="join-recaptcha-help">Complete the security check before submitting.</p>
+          </div>
           <button type="submit" class="btn-dark">Join for Free &rarr;</button>
         </form>
         <div class="join-status" id="join-status" role="status" aria-live="polite"></div>
@@ -98,6 +102,7 @@
 
 <script src="https://cdn.jsdelivr.net/npm/@emailjs/browser@4/dist/email.min.js"></script>
 <script src="scripts/email-config.js"></script>
+<script src="https://www.google.com/recaptcha/api.js?onload=onRecaptchaLoadCallback&render=explicit" async defer></script>
 <script src="scripts/main.js" defer></script>
 </body>
 </html>
