@@ -977,6 +977,25 @@ section {
   background: rgba(255, 245, 245, 0.96);
 }
 
+.join-recaptcha-wrap {
+  width: 100%;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 0.55rem;
+}
+
+.join-recaptcha {
+  min-height: 78px;
+}
+
+.join-recaptcha-help {
+  margin: 0;
+  color: rgba(10, 22, 40, 0.78);
+  font-size: 0.82rem;
+  font-weight: 600;
+}
+
 .btn-dark {
   background: var(--dark);
   color: var(--text);
@@ -1338,6 +1357,11 @@ footer {
 
   .join-form input {
     min-width: 0;
+  }
+
+  .join-recaptcha {
+    transform: scale(0.96);
+    transform-origin: center top;
   }
 
   .footer-logo {
