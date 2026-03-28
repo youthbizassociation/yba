@@ -6,3 +6,4 @@ window.YBA_EMAIL_CONFIG = {
   adminEmail: "youthbusinessassociation@outlook.com",
   recaptchaSiteKey: "6LdlW5ssAAAAABBxLlU-ccvwfutJOQo2KhH2MLnV"
 };
+
