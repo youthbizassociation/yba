@@ -6,6 +6,10 @@ const joinForm = document.getElementById("join-form");
 const joinEmail = document.getElementById("join-email");
 const joinStatus = document.getElementById("join-status");
 const joinButton = joinForm ? joinForm.querySelector("button") : null;
+const donationConfig = window.YBA_DONATION_CONFIG || null;
+const donationOneTimeLink = document.getElementById("donation-one-time-link");
+const donationMonthlyLink = document.getElementById("donation-monthly-link");
+const donationStatus = document.getElementById("donation-status");
 const copyrightYear = document.getElementById("copyright-year");
 const pageKey = document.body.dataset.page || "home";
 const emailConfig = window.YBA_EMAIL_CONFIG || null;
@@ -61,6 +65,7 @@ const activeMap = {
   programs: "programs.html",
   events: "events.html",
   impact: "impact.html",
+  donate: "donate.html",
   join: "join.html"
 };
 
@@ -108,6 +113,44 @@ const setStatus = (message, type) => {
   joinStatus.classList.toggle("is-error", type === "error");
   joinStatus.classList.toggle("is-success", type === "success");
 };
+
+const setDonationStatus = (message, type) => {
+  if (!donationStatus) {
+    return;
+  }
+
+  donationStatus.textContent = message;
+  donationStatus.classList.toggle("is-error", type === "error");
+  donationStatus.classList.toggle("is-success", type === "success");
+};
+
+if (donationOneTimeLink || donationMonthlyLink) {
+  const oneTimeUrl = donationConfig && typeof donationConfig.oneTimeUrl === "string" ? donationConfig.oneTimeUrl.trim() : "";
+  const monthlyUrl = donationConfig && typeof donationConfig.monthlyUrl === "string" ? donationConfig.monthlyUrl.trim() : "";
+  const platformName = donationConfig && donationConfig.platformName ? donationConfig.platformName : "your payment provider";
+  const configuredOneTime = oneTimeUrl && !oneTimeUrl.startsWith("YOUR_");
+  const configuredMonthly = monthlyUrl && !monthlyUrl.startsWith("YOUR_");
+
+  if (donationOneTimeLink && configuredOneTime) {
+    donationOneTimeLink.href = oneTimeUrl;
+    donationOneTimeLink.setAttribute("target", "_blank");
+    donationOneTimeLink.setAttribute("rel", "noopener noreferrer");
+  }
+
+  if (donationMonthlyLink) {
+    const monthlyHref = configuredMonthly ? monthlyUrl : (configuredOneTime ? oneTimeUrl : donationMonthlyLink.getAttribute("href"));
+    donationMonthlyLink.href = monthlyHref;
+    donationMonthlyLink.setAttribute("target", "_blank");
+    donationMonthlyLink.setAttribute("rel", "noopener noreferrer");
+  }
+
+  if (configuredOneTime) {
+    const monthlyMessage = configuredMonthly ? " One-time and monthly donations are ready." : " Monthly donations currently use the same donation page.";
+    setDonationStatus(`Secure online giving is active through ${platformName}.${monthlyMessage}`, "success");
+  } else {
+    setDonationStatus("Add your payment links in scripts/donation-config.js to accept online donations on this page.", "error");
+  }
+}
 
 if (joinForm && joinEmail && joinButton) {
   joinForm.addEventListener("submit", async (event) => {
