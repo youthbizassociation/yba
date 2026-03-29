@@ -6,12 +6,9 @@ const joinForm = document.getElementById("join-form");
 const joinEmail = document.getElementById("join-email");
 const joinStatus = document.getElementById("join-status");
 const joinButton = joinForm ? joinForm.querySelector("button") : null;
-const joinRecaptchaContainer = document.getElementById("join-recaptcha");
 const copyrightYear = document.getElementById("copyright-year");
 const pageKey = document.body.dataset.page || "home";
 const emailConfig = window.YBA_EMAIL_CONFIG || null;
-let recaptchaWidgetId = null;
-let recaptchaToken = "";
 
 if (window.emailjs && emailConfig && emailConfig.publicKey && !emailConfig.publicKey.startsWith("YOUR_")) {
   window.emailjs.init({
@@ -112,55 +109,6 @@ const setStatus = (message, type) => {
   joinStatus.classList.toggle("is-success", type === "success");
 };
 
-const recaptchaIsConfigured = Boolean(
-  emailConfig &&
-  emailConfig.recaptchaSiteKey &&
-  !emailConfig.recaptchaSiteKey.startsWith("YOUR_")
-);
-
-const resetRecaptcha = () => {
-  recaptchaToken = "";
-
-  if (window.grecaptcha && recaptchaWidgetId !== null) {
-    window.grecaptcha.reset(recaptchaWidgetId);
-  }
-};
-
-const mountRecaptcha = () => {
-  if (!joinRecaptchaContainer || !window.grecaptcha || !recaptchaIsConfigured || recaptchaWidgetId !== null) {
-    return;
-  }
-
-  recaptchaWidgetId = window.grecaptcha.render(joinRecaptchaContainer, {
-    sitekey: emailConfig.recaptchaSiteKey,
-    theme: "light",
-    callback: (token) => {
-      recaptchaToken = token;
-      if (joinStatus && joinStatus.textContent && joinStatus.classList.contains("is-error")) {
-        setStatus("", "");
-      }
-    },
-    "expired-callback": () => {
-      recaptchaToken = "";
-      setStatus("Your security check expired. Please complete it again.", "error");
-    },
-    "error-callback": () => {
-      recaptchaToken = "";
-      setStatus("We could not load the security check. Please refresh and try again.", "error");
-    }
-  });
-};
-
-window.onRecaptchaLoadCallback = () => {
-  mountRecaptcha();
-};
-
-window.addEventListener("load", () => {
-  if (window.grecaptcha && recaptchaIsConfigured) {
-    mountRecaptcha();
-  }
-});
-
 if (joinForm && joinEmail && joinButton) {
   joinForm.addEventListener("submit", async (event) => {
     event.preventDefault();
@@ -173,21 +121,6 @@ if (joinForm && joinEmail && joinButton) {
     if (!emailIsValid) {
       setStatus("Please enter a valid email address to join the association.", "error");
       joinEmail.focus();
-      return;
-    }
-
-    if (!recaptchaIsConfigured) {
-      setStatus("Signup security is not configured yet. Add your reCAPTCHA site key to enable submissions.", "error");
-      return;
-    }
-
-    mountRecaptcha();
-
-    if (!recaptchaToken) {
-      setStatus("Please complete the security check before joining.", "error");
-      if (joinRecaptchaContainer) {
-        joinRecaptchaContainer.scrollIntoView({ behavior: "smooth", block: "center" });
-      }
       return;
     }
 
@@ -222,12 +155,10 @@ if (joinForm && joinEmail && joinButton) {
           admin_email: emailConfig.adminEmail || "youthbusinessassociation@outlook.com",
           reply_to: email,
           user_email: email,
-          submitted_at: submittedAt,
-          recaptcha_token: recaptchaToken
+          submitted_at: submittedAt
         }),
         window.emailjs.send(emailConfig.serviceId, emailConfig.welcomeTemplateId, {
-          user_email: email,
-          recaptcha_token: recaptchaToken
+          user_email: email
         })
       ]);
 
@@ -237,11 +168,9 @@ if (joinForm && joinEmail && joinButton) {
 
       joinForm.reset();
       joinEmail.setAttribute("aria-invalid", "false");
-      resetRecaptcha();
       setStatus("You are all set. Please check your inbox for a welcome email.", "success");
     } catch (error) {
       setStatus(error.message || "We could not process your signup right now. Please try again.", "error");
-      resetRecaptcha();
     } finally {
       joinButton.disabled = false;
       joinButton.textContent = "Join for Free ->";
@@ -255,4 +184,3 @@ if (joinForm && joinEmail && joinButton) {
     }
   });
 }
-
