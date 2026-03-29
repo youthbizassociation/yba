@@ -2,7 +2,7 @@
   "name": "Youth Business Association",
   "short_name": "YBA",
   "description": "A nonprofit helping students build real-world business skills through mentorship, workshops, and community.",
-  "start_url": "./",
+  "start_url": "/yba/",
   "display": "standalone",
   "background_color": "#0a1628",
   "theme_color": "#0a1628",
