@@ -268,7 +268,7 @@ if (joinForm && joinFirstName && joinLastName && joinGrade && joinSchool && join
       joinSchool.setAttribute("aria-invalid", "false");
       joinState.setAttribute("aria-invalid", "false");
       joinEmail.setAttribute("aria-invalid", "false");
-      setStatus("You are all set. Please check your inbox for a welcome email.", "success");
+      setStatus("You are all set. Please check your inbox or your spam/junk folder for our welcome email.", "success");
     } catch (error) {
       setStatus(error.message || "We could not process your signup right now. Please try again.", "error");
     } finally {
