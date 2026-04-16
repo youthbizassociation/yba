@@ -978,7 +978,8 @@ section {
   justify-content: center;
 }
 
-.join-form input {
+.join-form input,
+.join-form select {
   flex: 1;
   min-width: 220px;
   width: 100%;
