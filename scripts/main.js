@@ -3,6 +3,11 @@ const navLinks = document.querySelector(".nav-links");
 const navAnchors = Array.from(document.querySelectorAll(".nav-links a"));
 const revealItems = document.querySelectorAll(".reveal");
 const joinForm = document.getElementById("join-form");
+const joinFirstName = document.getElementById("join-first-name");
+const joinLastName = document.getElementById("join-last-name");
+const joinGrade = document.getElementById("join-grade");
+const joinSchool = document.getElementById("join-school");
+const joinState = document.getElementById("join-state");
 const joinEmail = document.getElementById("join-email");
 const joinStatus = document.getElementById("join-status");
 const joinButton = joinForm ? joinForm.querySelector("button") : null;
@@ -152,14 +157,54 @@ if (donationOneTimeLink || donationMonthlyLink) {
   }
 }
 
-if (joinForm && joinEmail && joinButton) {
+if (joinForm && joinFirstName && joinLastName && joinGrade && joinSchool && joinState && joinEmail && joinButton) {
   joinForm.addEventListener("submit", async (event) => {
     event.preventDefault();
 
+    const firstName = joinFirstName.value.trim();
+    const lastName = joinLastName.value.trim();
+    const grade = joinGrade.value.trim();
+    const school = joinSchool.value.trim();
+    const state = joinState.value;
     const email = joinEmail.value.trim().toLowerCase();
     const emailIsValid = /^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(email);
 
+    joinFirstName.setAttribute("aria-invalid", String(!firstName));
+    joinLastName.setAttribute("aria-invalid", String(!lastName));
+    joinGrade.setAttribute("aria-invalid", String(!grade));
+    joinSchool.setAttribute("aria-invalid", String(!school));
+    joinState.setAttribute("aria-invalid", String(!state));
     joinEmail.setAttribute("aria-invalid", String(!emailIsValid));
+
+    if (!firstName) {
+      setStatus("Please enter your first name.", "error");
+      joinFirstName.focus();
+      return;
+    }
+
+    if (!lastName) {
+      setStatus("Please enter your last name.", "error");
+      joinLastName.focus();
+      return;
+    }
+
+    if (!grade) {
+      setStatus("Please enter your grade.", "error");
+      joinGrade.focus();
+      return;
+    }
+
+    if (!school) {
+      setStatus("Please enter your school.", "error");
+      joinSchool.focus();
+      return;
+    }
+
+    if (!state) {
+      setStatus("Please select your state.", "error");
+      joinState.focus();
+      return;
+    }
 
     if (!emailIsValid) {
       setStatus("Please enter a valid email address to join the association.", "error");
@@ -198,10 +243,17 @@ if (joinForm && joinEmail && joinButton) {
           admin_email: emailConfig.adminEmail || "youthbusinessassociation@outlook.com",
           reply_to: email,
           user_email: email,
+          user_name: `${firstName} ${lastName}`,
+          first_name: firstName,
+          last_name: lastName,
+          grade,
+          school,
+          state,
           submitted_at: submittedAt
         }),
         window.emailjs.send(emailConfig.serviceId, emailConfig.welcomeTemplateId, {
-          user_email: email
+          user_email: email,
+          user_name: `${firstName} ${lastName}`
         })
       ]);
 
@@ -210,6 +262,11 @@ if (joinForm && joinEmail && joinButton) {
       }
 
       joinForm.reset();
+      joinFirstName.setAttribute("aria-invalid", "false");
+      joinLastName.setAttribute("aria-invalid", "false");
+      joinGrade.setAttribute("aria-invalid", "false");
+      joinSchool.setAttribute("aria-invalid", "false");
+      joinState.setAttribute("aria-invalid", "false");
       joinEmail.setAttribute("aria-invalid", "false");
       setStatus("You are all set. Please check your inbox for a welcome email.", "success");
     } catch (error) {
@@ -220,10 +277,20 @@ if (joinForm && joinEmail && joinButton) {
     }
   });
 
-  joinEmail.addEventListener("input", () => {
-    joinEmail.setAttribute("aria-invalid", "false");
+  const clearJoinError = () => {
     if (joinStatus && joinStatus.textContent) {
       setStatus("", "");
     }
+  };
+
+  [joinFirstName, joinLastName, joinGrade, joinSchool, joinState, joinEmail].forEach((field) => {
+    if (!field) {
+      return;
+    }
+
+    field.addEventListener("input", () => {
+      field.setAttribute("aria-invalid", "false");
+      clearJoinError();
+    });
   });
 }
