@@ -789,9 +789,16 @@ section { position: relative; z-index: 1; }
   grid-template-columns: repeat(3, 1fr);
   gap: 1.25rem;
   margin-top: 3rem;
+  align-items: stretch;
 }
 
-.leadership-card { position: relative; overflow: hidden; }
+.leadership-card {
+  margin: 0;
+  width: 100%;
+  max-width: 340px;
+  min-height: 380px;
+  justify-self: center;
+}
 
 .leadership-role {
   display: inline-block;
@@ -805,6 +812,130 @@ section { position: relative; z-index: 1; }
   text-transform: uppercase;
   padding: 0.28rem 0.7rem;
   border-radius: var(--r-pill);
+}
+
+/* From Uiverse.io by MikeAndrewDesigner, adapted to the YBA theme */
+.e-card {
+  background: linear-gradient(180deg, rgba(11, 23, 41, 0.9), rgba(6, 14, 28, 0.98));
+  box-shadow: 0 18px 40px rgba(0, 0, 0, 0.28);
+  position: relative;
+  display: flex;
+  border: 1px solid var(--border);
+  border-radius: 24px;
+  overflow: hidden;
+  isolation: isolate;
+}
+
+.e-card .image {
+  position: absolute;
+  inset: 0;
+  background:
+    radial-gradient(circle at top, rgba(138, 255, 71, 0.14), transparent 36%),
+    linear-gradient(180deg, rgba(43, 127, 255, 0.08), transparent 62%);
+  z-index: 0;
+}
+
+.e-card .wave {
+  position: absolute;
+  width: 170%;
+  height: 170%;
+  opacity: 0.58;
+  left: 50%;
+  top: 50%;
+  transform: translate(-50%, -50%);
+  background: linear-gradient(135deg, rgba(43, 127, 255, 0.88), rgba(53, 207, 174, 0.74) 60%, rgba(138, 255, 71, 0.64));
+}
+
+.e-card .icon {
+  width: 4.25rem;
+  height: 4.25rem;
+  margin: 0 auto;
+  object-fit: cover;
+}
+
+.e-card .infotop {
+  position: relative;
+  z-index: 2;
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  gap: 0.95rem;
+  padding: 2.1rem 1.5rem;
+  text-align: center;
+  color: var(--text);
+}
+
+.e-card .name {
+  font-family: var(--ff-head);
+  font-size: 1.35rem;
+  font-weight: 700;
+  letter-spacing: -0.02em;
+  text-transform: none;
+}
+
+.leadership-summary {
+  max-width: 28ch;
+  font-size: 0.92rem;
+  line-height: 1.7;
+  color: rgba(234, 240, 255, 0.84);
+  font-weight: 300;
+}
+
+.leadership-logo {
+  padding: 0.45rem;
+  border-radius: 18px;
+  background: rgba(6, 14, 28, 0.42);
+  box-shadow: 0 0 0 1px rgba(255, 255, 255, 0.08);
+}
+
+.leadership-card .leadership-role {
+  margin-bottom: 0;
+  background: rgba(6, 14, 28, 0.42);
+  border-color: rgba(138, 255, 71, 0.28);
+  color: #d7ffb6;
+}
+
+.e-card .wave-2,
+.e-card .wave-3 {
+  top: 72%;
+}
+
+.e-card.playing .wave {
+  border-radius: 40%;
+  animation: wave 3000ms infinite linear;
+}
+
+.e-card .wave {
+  border-radius: 40%;
+  animation: wave 55s infinite linear;
+}
+
+.e-card.playing .wave-2 {
+  animation-duration: 4000ms;
+}
+
+.e-card .wave-2 {
+  animation-duration: 50s;
+}
+
+.e-card.playing .wave-3 {
+  animation-duration: 5000ms;
+}
+
+.e-card .wave-3 {
+  animation-duration: 45s;
+}
+
+@keyframes wave {
+  0% {
+    transform: translate(-50%, -50%) rotate(0deg);
+  }
+
+  100% {
+    transform: translate(-50%, -50%) rotate(360deg);
+  }
 }
 
 /* ── FAQ & Policy ── */
@@ -1225,6 +1356,10 @@ footer {
   .faq-item, .policy-block { padding: 1.5rem; }
   .mission-visual { padding: 1.5rem; }
   .pillar { padding: 0.95rem 1rem; }
+  .leadership-card { min-height: 350px; max-width: 100%; }
+  .e-card .infotop { padding: 1.8rem 1.15rem; }
+  .e-card .name { font-size: 1.2rem; }
+  .leadership-summary { font-size: 0.88rem; }
 
   .join-box { padding: 2.5rem 1.25rem; border-radius: var(--r-lg); }
   .join-form { flex-direction: column; max-width: 100%; }
