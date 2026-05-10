@@ -740,7 +740,6 @@ section { position: relative; z-index: 1; }
 
 .social-embed-card .iframely-responsive {
   width: 100%;
-  min-height: 710px;
 }
 
 .social-actions {
