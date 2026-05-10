@@ -732,6 +732,17 @@ section { position: relative; z-index: 1; }
   border: 0;
 }
 
+.social-embed-card .iframely-embed {
+  width: 100%;
+  border-radius: var(--r-lg);
+  overflow: hidden;
+}
+
+.social-embed-card .iframely-responsive {
+  width: 100%;
+  min-height: 710px;
+}
+
 .social-actions {
   margin-top: 1.75rem;
 }
