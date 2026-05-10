@@ -242,6 +242,10 @@ nav {
   margin: 0 auto;
 }
 
+body[data-page="impact"] .page-hero h1 {
+  font-size: clamp(2.1rem, 4.6vw, 3.4rem);
+}
+
 .page-hero p {
   margin: 1.4rem auto 0;
   max-width: 660px;
@@ -249,6 +253,11 @@ nav {
   line-height: 1.75;
   font-size: 1.05rem;
   font-weight: 300;
+}
+
+body[data-page="impact"] .page-hero p {
+  font-size: 0.98rem;
+  max-width: 600px;
 }
 
 /* ── Hero Badge ── */
@@ -309,6 +318,15 @@ nav {
   max-width: 580px;
   line-height: 1.75;
   animation: fadeUp 0.9s 0.16s ease both;
+}
+
+body[data-page="home"] .hero h1 {
+  font-size: clamp(2.8rem, 6.4vw, 5.4rem);
+}
+
+body[data-page="home"] .hero > p {
+  font-size: clamp(0.96rem, 1.7vw, 1.08rem);
+  max-width: 540px;
 }
 
 .hero-ctas {
