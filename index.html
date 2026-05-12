@@ -276,5 +276,203 @@
 </footer>
 
 <script src="scripts/main.js" defer></script>
+
+<!-- Floating Discord Button (homepage only) -->
+<div class="discord-float" id="discordFloat" aria-label="Join our Discord server" role="complementary">
+  <a href="https://discord.gg/QXCjg9n4sF" target="_blank" rel="noopener noreferrer" class="discord-float__link" aria-label="Join YBA on Discord">
+    <div class="discord-float__light-holder" aria-hidden="true">
+      <div class="discord-float__dot"></div>
+      <div class="discord-float__light"></div>
+    </div>
+    <div class="discord-float__button-holder">
+      <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" role="img" aria-hidden="true" focusable="false">
+        <path d="M20.317 4.3698a19.7913 19.7913 0 00-4.8851-1.5152.0741.0741 0 00-.0785.0371c-.211.3753-.4447.8648-.6083 1.2495-1.8447-.2762-3.68-.2762-5.4868 0-.1636-.3933-.4058-.8742-.6177-1.2495a.077.077 0 00-.0785-.037 19.7363 19.7363 0 00-4.8852 1.515.0699.0699 0 00-.0321.0277C.5334 9.0458-.319 13.5799.0992 18.0578a.0824.0824 0 00.0312.0561c2.0528 1.5076 4.0413 2.4228 5.9929 3.0294a.0777.0777 0 00.0842-.0276c.4616-.6304.8731-1.2952 1.226-1.9942a.076.076 0 00-.0416-.1057c-.6528-.2476-1.2743-.5495-1.8722-.8923a.077.077 0 01-.0076-.1277c.1258-.0943.2517-.1923.3718-.2914a.0743.0743 0 01.0776-.0105c3.9278 1.7933 8.18 1.7933 12.0614 0a.0739.0739 0 01.0785.0095c.1202.099.246.1981.3728.2924a.077.077 0 01-.0066.1276 12.2986 12.2986 0 01-1.873.8914.0766.0766 0 00-.0407.1067c.3604.698.7719 1.3628 1.225 1.9932a.076.076 0 00.0842.0286c1.961-.6067 3.9495-1.5219 6.0023-3.0294a.077.077 0 00.0313-.0552c.5004-5.177-.8382-9.6739-3.5485-13.6604a.061.061 0 00-.0312-.0286zM8.02 15.3312c-1.1825 0-2.1569-1.0857-2.1569-2.419 0-1.3332.9555-2.4189 2.157-2.4189 1.2108 0 2.1757 1.0952 2.1568 2.419 0 1.3332-.9555 2.4189-2.1569 2.4189zm7.9748 0c-1.1825 0-2.1569-1.0857-2.1569-2.419 0-1.3332.9554-2.4189 2.1569-2.4189 1.2108 0 2.1757 1.0952 2.1568 2.419 0 1.3332-.946 2.4189-2.1568 2.4189Z"/>
+      </svg>
+      <p>Discord</p>
+    </div>
+  </a>
+</div>
+
+<style>
+/* ── Floating Discord Button (index.html only) ── */
+.discord-float {
+  position: fixed;
+  bottom: 2.25rem;
+  right: 2.25rem;
+  z-index: 200;
+  opacity: 0;
+  transform: translateY(18px);
+  transition: opacity 0.4s ease, transform 0.4s ease;
+  pointer-events: none;
+}
+
+.discord-float.is-visible {
+  opacity: 1;
+  transform: translateY(0);
+  pointer-events: auto;
+}
+
+.discord-float__link {
+  position: relative;
+  display: flex;
+  align-items: flex-end;
+  text-decoration: none;
+  height: 160px;
+}
+
+/* Light beam above the button */
+.discord-float__light-holder {
+  position: absolute;
+  height: 160px;
+  width: 84px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  top: 0;
+  left: 50%;
+  transform: translateX(-50%);
+  pointer-events: none;
+}
+
+.discord-float__dot {
+  position: absolute;
+  top: 0;
+  width: 8px;
+  height: 8px;
+  background: #2B7FFF;
+  border-radius: 50%;
+  z-index: 2;
+  box-shadow: 0 0 8px rgba(43, 127, 255, 0.8);
+}
+
+.discord-float__light {
+  position: absolute;
+  top: 0;
+  width: 160px;
+  height: 160px;
+  clip-path: polygon(50% 0%, 20% 100%, 80% 100%);
+  background: transparent;
+  transition: background 0.35s ease;
+}
+
+/* The button face */
+.discord-float__button-holder {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  height: 84px;
+  width: 84px;
+  background: var(--navy-card-solid);
+  border-radius: var(--r-md);
+  border: 1px solid var(--accent-border);
+  color: var(--text-2);
+  font-family: var(--ff-head);
+  font-weight: 700;
+  font-size: 0.72rem;
+  letter-spacing: 0.04em;
+  text-transform: uppercase;
+  transition: border-color 0.3s, color 0.3s, box-shadow 0.3s, background 0.3s;
+  box-shadow: 0 4px 24px rgba(0,0,0,0.4), 0 0 0 1px rgba(43,127,255,0.14);
+  gap: 0.45rem;
+  position: relative;
+}
+
+.discord-float__button-holder svg {
+  height: 28px;
+  width: 28px;
+  fill: var(--text-2);
+  transition: fill 0.3s;
+}
+
+/* Hover states */
+.discord-float__link:hover .discord-float__button-holder {
+  border-color: rgba(88, 101, 242, 0.75);
+  color: #8A9FFF;
+  background: rgba(88, 101, 242, 0.1);
+  box-shadow:
+    0 6px 32px rgba(88, 101, 242, 0.25),
+    0 0 0 1px rgba(88, 101, 242, 0.35);
+}
+
+.discord-float__link:hover .discord-float__button-holder svg {
+  fill: #8A9FFF;
+}
+
+.discord-float__link:hover .discord-float__dot {
+  background: #8A9FFF;
+  box-shadow: 0 0 10px rgba(88, 101, 242, 0.9);
+}
+
+.discord-float__link:hover .discord-float__light {
+  background: linear-gradient(
+    180deg,
+    rgba(88, 101, 242, 0.65) 0%,
+    rgba(43, 127, 255, 0.15) 55%,
+    transparent 100%
+  );
+}
+
+/* Pulse ring on the dot */
+.discord-float__dot::after {
+  content: "";
+  position: absolute;
+  inset: -3px;
+  border-radius: 50%;
+  border: 1px solid rgba(43, 127, 255, 0.5);
+  animation: discordPulse 2.4s ease infinite;
+}
+
+@keyframes discordPulse {
+  0%, 100% { opacity: 1; transform: scale(1); }
+  50%       { opacity: 0; transform: scale(2.2); }
+}
+
+@media (max-width: 600px) {
+  .discord-float {
+    bottom: 1.25rem;
+    right: 1.25rem;
+  }
+  .discord-float__link { height: 130px; }
+  .discord-float__light-holder { height: 130px; width: 70px; }
+  .discord-float__light { width: 130px; height: 130px; }
+  .discord-float__button-holder { height: 70px; width: 70px; font-size: 0.65rem; }
+  .discord-float__button-holder svg { height: 22px; width: 22px; }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .discord-float__dot::after { animation: none; }
+  .discord-float { transition: none; }
+}
+</style>
+
+<script>
+(function () {
+  // Only runs on the homepage
+  if (!document.body.dataset.page || document.body.dataset.page !== 'home') return;
+
+  var floatEl = document.getElementById('discordFloat');
+  if (!floatEl) return;
+
+  var THRESHOLD = 300; // px scrolled before it appears
+  var ticking = false;
+
+  function onScroll() {
+    if (!ticking) {
+      requestAnimationFrame(function () {
+        if (window.scrollY > THRESHOLD) {
+          floatEl.classList.add('is-visible');
+        } else {
+          floatEl.classList.remove('is-visible');
+        }
+        ticking = false;
+      });
+      ticking = true;
+    }
+  }
+
+  window.addEventListener('scroll', onScroll, { passive: true });
+})();
+</script>
 </body>
 </html>
