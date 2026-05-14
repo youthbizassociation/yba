@@ -871,8 +871,9 @@ section { position: relative; z-index: 1; }
 
 /* â”€â”€ Leadership â”€â”€ */
 .leadership-grid {
-  display: grid;
-  grid-template-columns: repeat(3, 1fr);
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
   gap: 1.25rem;
   margin-top: 3rem;
   align-items: stretch;
@@ -880,10 +881,10 @@ section { position: relative; z-index: 1; }
 
 .leadership-card {
   margin: 0;
+  flex: 0 1 340px;
   width: 100%;
   max-width: 340px;
   min-height: 380px;
-  justify-self: center;
 }
 
 .leadership-role {
