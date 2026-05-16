@@ -10,10 +10,17 @@ const joinSchool = document.getElementById("join-school");
 const joinState = document.getElementById("join-state");
 const joinEmail = document.getElementById("join-email");
 const joinStatus = document.getElementById("join-status");
+const joinReferralNote = document.getElementById("join-referral-note");
 const joinButton = joinForm ? joinForm.querySelector("button") : null;
 const copyrightYear = document.getElementById("copyright-year");
 const pageKey = document.body.dataset.page || "home";
 const emailConfig = window.YBA_EMAIL_CONFIG || null;
+const emailPattern = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+const searchParams = new URLSearchParams(window.location.search);
+const referralName = (searchParams.get("ref_name") || "").trim();
+const referralEmail = (searchParams.get("ref_email") || "").trim().toLowerCase();
+const referralEmailIsValid = emailPattern.test(referralEmail);
+const referralActive = Boolean(referralName && referralEmailIsValid);
 
 if (window.emailjs && emailConfig && emailConfig.publicKey && !emailConfig.publicKey.startsWith("YOUR_")) {
   window.emailjs.init({
@@ -23,6 +30,14 @@ if (window.emailjs && emailConfig && emailConfig.publicKey && !emailConfig.publi
 
 if (copyrightYear) {
   copyrightYear.textContent = String(new Date().getFullYear());
+}
+
+if (joinReferralNote) {
+  joinReferralNote.hidden = !referralActive;
+
+  if (referralActive) {
+    joinReferralNote.textContent = `You were invited by ${referralName}. When you sign up, they will receive your submitted join information.`;
+  }
 }
 
 if (navToggle && navLinks) {
@@ -124,7 +139,7 @@ if (joinForm && joinFirstName && joinLastName && joinGrade && joinSchool && join
     const school = joinSchool.value.trim();
     const state = joinState.value;
     const email = joinEmail.value.trim().toLowerCase();
-    const emailIsValid = /^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(email);
+    const emailIsValid = emailPattern.test(email);
 
     joinFirstName.setAttribute("aria-invalid", String(!firstName));
     joinLastName.setAttribute("aria-invalid", String(!lastName));
@@ -195,7 +210,7 @@ if (joinForm && joinFirstName && joinLastName && joinGrade && joinSchool && join
         timeStyle: "short"
       });
 
-      const [adminResult, welcomeResult] = await Promise.all([
+      const emailRequests = [
         window.emailjs.send(emailConfig.serviceId, emailConfig.adminTemplateId, {
           admin_email: emailConfig.adminEmail || "youthbusinessassociation@outlook.com",
           reply_to: email,
@@ -206,15 +221,38 @@ if (joinForm && joinFirstName && joinLastName && joinGrade && joinSchool && join
           grade,
           school,
           state,
-          submitted_at: submittedAt
+          submitted_at: submittedAt,
+          referral_name: referralActive ? referralName : "",
+          referral_email: referralActive ? referralEmail : ""
         }),
         window.emailjs.send(emailConfig.serviceId, emailConfig.welcomeTemplateId, {
           user_email: email,
           user_name: `${firstName} ${lastName}`
         })
-      ]);
+      ];
 
-      if (adminResult.status !== 200 || welcomeResult.status !== 200) {
+      if (referralActive) {
+        emailRequests.push(
+          window.emailjs.send(emailConfig.serviceId, emailConfig.adminTemplateId, {
+            admin_email: referralEmail,
+            reply_to: email,
+            user_email: email,
+            user_name: `${firstName} ${lastName}`,
+            first_name: firstName,
+            last_name: lastName,
+            grade,
+            school,
+            state,
+            submitted_at: submittedAt,
+            referral_name,
+            referral_email
+          })
+        );
+      }
+
+      const emailResults = await Promise.all(emailRequests);
+
+      if (!emailResults.every((result) => result.status === 200)) {
         throw new Error("We could not send your signup email right now. Please try again.");
       }
 
