@@ -10,25 +10,34 @@ const joinSchool = document.getElementById("join-school");
 const joinState = document.getElementById("join-state");
 const joinEmail = document.getElementById("join-email");
 const joinStatus = document.getElementById("join-status");
+const joinReferralNote = document.getElementById("join-referral-note");
 const joinButton = joinForm ? joinForm.querySelector("button") : null;
-const donationConfig = window.YBA_DONATION_CONFIG || null;
-const donationOneTimeLink = document.getElementById("donation-one-time-link");
-const donationMonthlyLink = document.getElementById("donation-monthly-link");
-const donationStatus = document.getElementById("donation-status");
 const copyrightYear = document.getElementById("copyright-year");
 const pageKey = document.body.dataset.page || "home";
 const emailConfig = window.YBA_EMAIL_CONFIG || null;
+const emailPattern = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+const searchParams = new URLSearchParams(window.location.search);
+const referralName = (searchParams.get("ref_name") || "").trim();
+const referralEmail = (searchParams.get("ref_email") || "").trim().toLowerCase();
+const referralEmailIsValid = emailPattern.test(referralEmail);
+const referralActive = Boolean(referralName && referralEmailIsValid);
 
 if (window.emailjs && emailConfig && emailConfig.publicKey && !emailConfig.publicKey.startsWith("YOUR_")) {
-  window.emailjs.init({
-    publicKey: emailConfig.publicKey
-  });
+  window.emailjs.init({ publicKey: emailConfig.publicKey });
 }
 
 if (copyrightYear) {
   copyrightYear.textContent = String(new Date().getFullYear());
 }
 
+if (joinReferralNote) {
+  joinReferralNote.hidden = !referralActive;
+  if (referralActive) {
+    joinReferralNote.textContent = `You were invited by ${referralName}. When you sign up, they will receive your submitted join information.`;
+  }
+}
+
+// Navigation
 if (navToggle && navLinks) {
   const closeMenu = () => {
     navLinks.classList.remove("open");
@@ -42,40 +51,31 @@ if (navToggle && navLinks) {
 
   navAnchors.forEach((anchor) => {
     anchor.addEventListener("click", () => {
-      if (window.innerWidth <= 900) {
-        closeMenu();
-      }
+      if (window.innerWidth <= 900) closeMenu();
     });
   });
 
   document.addEventListener("click", (event) => {
-    if (!navLinks.classList.contains("open")) {
-      return;
-    }
-
+    if (!navLinks.classList.contains("open")) return;
     if (!navLinks.contains(event.target) && !navToggle.contains(event.target)) {
       closeMenu();
     }
   });
 
   document.addEventListener("keydown", (event) => {
-    if (event.key === "Escape") {
-      closeMenu();
-    }
+    if (event.key === "Escape") closeMenu();
   });
 }
 
+// Current page highlighting
 const activeMap = {
   about: "about.html",
   programs: "programs.html",
   events: "events.html",
-  impact: "impact.html",
-  donate: "donate.html",
   join: "join.html"
 };
 
 const activeHref = activeMap[pageKey];
-
 if (activeHref) {
   navAnchors.forEach((anchor) => {
     const isActive = anchor.getAttribute("href") === activeHref;
@@ -88,13 +88,11 @@ if (activeHref) {
   });
 }
 
+// Scroll reveal animations
 if ("IntersectionObserver" in window && revealItems.length > 0) {
   const revealObserver = new IntersectionObserver((entries, observer) => {
     entries.forEach((entry) => {
-      if (!entry.isIntersecting) {
-        return;
-      }
-
+      if (!entry.isIntersecting) return;
       entry.target.classList.add("visible");
       observer.unobserve(entry.target);
     });
@@ -105,58 +103,20 @@ if ("IntersectionObserver" in window && revealItems.length > 0) {
   revealItems.forEach((item) => item.classList.add("visible"));
 }
 
+// Staggered card animations
 document.querySelectorAll(".programs-grid .program-card, .impact-cards .impact-card, .feature-grid .feature-card").forEach((element, index) => {
   element.style.transitionDelay = `${index * 0.08}s`;
 });
 
+// Join form helpers
 const setStatus = (message, type) => {
-  if (!joinStatus) {
-    return;
-  }
-
+  if (!joinStatus) return;
   joinStatus.textContent = message;
   joinStatus.classList.toggle("is-error", type === "error");
   joinStatus.classList.toggle("is-success", type === "success");
 };
 
-const setDonationStatus = (message, type) => {
-  if (!donationStatus) {
-    return;
-  }
-
-  donationStatus.textContent = message;
-  donationStatus.classList.toggle("is-error", type === "error");
-  donationStatus.classList.toggle("is-success", type === "success");
-};
-
-if (donationOneTimeLink || donationMonthlyLink) {
-  const oneTimeUrl = donationConfig && typeof donationConfig.oneTimeUrl === "string" ? donationConfig.oneTimeUrl.trim() : "";
-  const monthlyUrl = donationConfig && typeof donationConfig.monthlyUrl === "string" ? donationConfig.monthlyUrl.trim() : "";
-  const platformName = donationConfig && donationConfig.platformName ? donationConfig.platformName : "your payment provider";
-  const configuredOneTime = oneTimeUrl && !oneTimeUrl.startsWith("YOUR_");
-  const configuredMonthly = monthlyUrl && !monthlyUrl.startsWith("YOUR_");
-
-  if (donationOneTimeLink && configuredOneTime) {
-    donationOneTimeLink.href = oneTimeUrl;
-    donationOneTimeLink.setAttribute("target", "_blank");
-    donationOneTimeLink.setAttribute("rel", "noopener noreferrer");
-  }
-
-  if (donationMonthlyLink) {
-    const monthlyHref = configuredMonthly ? monthlyUrl : (configuredOneTime ? oneTimeUrl : donationMonthlyLink.getAttribute("href"));
-    donationMonthlyLink.href = monthlyHref;
-    donationMonthlyLink.setAttribute("target", "_blank");
-    donationMonthlyLink.setAttribute("rel", "noopener noreferrer");
-  }
-
-  if (configuredOneTime) {
-    const monthlyMessage = configuredMonthly ? " One-time and monthly donations are ready." : " Monthly donations currently use the same donation page.";
-    setDonationStatus(`Secure online giving is active through ${platformName}.${monthlyMessage}`, "success");
-  } else {
-    setDonationStatus("Add your payment links in scripts/donation-config.js to accept online donations on this page.", "error");
-  }
-}
-
+// Join form submission
 if (joinForm && joinFirstName && joinLastName && joinGrade && joinSchool && joinState && joinEmail && joinButton) {
   joinForm.addEventListener("submit", async (event) => {
     event.preventDefault();
@@ -167,7 +127,7 @@ if (joinForm && joinFirstName && joinLastName && joinGrade && joinSchool && join
     const school = joinSchool.value.trim();
     const state = joinState.value;
     const email = joinEmail.value.trim().toLowerCase();
-    const emailIsValid = /^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(email);
+    const emailIsValid = emailPattern.test(email);
 
     joinFirstName.setAttribute("aria-invalid", String(!firstName));
     joinLastName.setAttribute("aria-invalid", String(!lastName));
@@ -176,41 +136,12 @@ if (joinForm && joinFirstName && joinLastName && joinGrade && joinSchool && join
     joinState.setAttribute("aria-invalid", String(!state));
     joinEmail.setAttribute("aria-invalid", String(!emailIsValid));
 
-    if (!firstName) {
-      setStatus("Please enter your first name.", "error");
-      joinFirstName.focus();
-      return;
-    }
-
-    if (!lastName) {
-      setStatus("Please enter your last name.", "error");
-      joinLastName.focus();
-      return;
-    }
-
-    if (!grade) {
-      setStatus("Please enter your grade.", "error");
-      joinGrade.focus();
-      return;
-    }
-
-    if (!school) {
-      setStatus("Please enter your school.", "error");
-      joinSchool.focus();
-      return;
-    }
-
-    if (!state) {
-      setStatus("Please select your state.", "error");
-      joinState.focus();
-      return;
-    }
-
-    if (!emailIsValid) {
-      setStatus("Please enter a valid email address to join the association.", "error");
-      joinEmail.focus();
-      return;
-    }
+    if (!firstName) { setStatus("Please enter your first name.", "error"); joinFirstName.focus(); return; }
+    if (!lastName) { setStatus("Please enter your last name.", "error"); joinLastName.focus(); return; }
+    if (!grade) { setStatus("Please enter your grade.", "error"); joinGrade.focus(); return; }
+    if (!school) { setStatus("Please enter your school.", "error"); joinSchool.focus(); return; }
+    if (!state) { setStatus("Please select your state.", "error"); joinState.focus(); return; }
+    if (!emailIsValid) { setStatus("Please enter a valid email address.", "error"); joinEmail.focus(); return; }
 
     joinButton.disabled = true;
     joinButton.textContent = "Submitting...";
@@ -238,7 +169,7 @@ if (joinForm && joinFirstName && joinLastName && joinGrade && joinSchool && join
         timeStyle: "short"
       });
 
-      const [adminResult, welcomeResult] = await Promise.all([
+      const emailRequests = [
         window.emailjs.send(emailConfig.serviceId, emailConfig.adminTemplateId, {
           admin_email: emailConfig.adminEmail || "youthbusinessassociation@outlook.com",
           reply_to: email,
@@ -249,15 +180,38 @@ if (joinForm && joinFirstName && joinLastName && joinGrade && joinSchool && join
           grade,
           school,
           state,
-          submitted_at: submittedAt
+          submitted_at: submittedAt,
+          referral_name: referralActive ? referralName : "",
+          referral_email: referralActive ? referralEmail : ""
         }),
         window.emailjs.send(emailConfig.serviceId, emailConfig.welcomeTemplateId, {
           user_email: email,
           user_name: `${firstName} ${lastName}`
         })
-      ]);
+      ];
 
-      if (adminResult.status !== 200 || welcomeResult.status !== 200) {
+      if (referralActive) {
+        emailRequests.push(
+          window.emailjs.send(emailConfig.serviceId, emailConfig.adminTemplateId, {
+            admin_email: referralEmail,
+            reply_to: email,
+            user_email: email,
+            user_name: `${firstName} ${lastName}`,
+            first_name: firstName,
+            last_name: lastName,
+            grade,
+            school,
+            state,
+            submitted_at: submittedAt,
+            referral_name,
+            referral_email
+          })
+        );
+      }
+
+      const emailResults = await Promise.all(emailRequests);
+
+      if (!emailResults.every((result) => result.status === 200)) {
         throw new Error("We could not send your signup email right now. Please try again.");
       }
 
@@ -268,26 +222,21 @@ if (joinForm && joinFirstName && joinLastName && joinGrade && joinSchool && join
       joinSchool.setAttribute("aria-invalid", "false");
       joinState.setAttribute("aria-invalid", "false");
       joinEmail.setAttribute("aria-invalid", "false");
-      setStatus("You are all set. Please check your inbox or your spam/junk folder for our welcome email.", "success");
+      setStatus("You are all set. Please check your inbox or spam folder for our welcome email.", "success");
     } catch (error) {
       setStatus(error.message || "We could not process your signup right now. Please try again.", "error");
     } finally {
       joinButton.disabled = false;
-      joinButton.textContent = "Join for Free ->";
+      joinButton.textContent = "Join for Free →";
     }
   });
 
   const clearJoinError = () => {
-    if (joinStatus && joinStatus.textContent) {
-      setStatus("", "");
-    }
+    if (joinStatus && joinStatus.textContent) setStatus("", "");
   };
 
   [joinFirstName, joinLastName, joinGrade, joinSchool, joinState, joinEmail].forEach((field) => {
-    if (!field) {
-      return;
-    }
-
+    if (!field) return;
     field.addEventListener("input", () => {
       field.setAttribute("aria-invalid", "false");
       clearJoinError();

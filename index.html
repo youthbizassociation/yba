@@ -45,6 +45,7 @@
       "nonprofitStatus": "Nonprofit501c3",
       "sameAs": [
         "https://www.instagram.com/youth_business.a",
+        "https://www.linkedin.com/company/youth-biz-association/",
         "https://discord.gg/QXCjg9n4sF"
       ]
     },
@@ -52,34 +53,6 @@
       "@type": "WebSite",
       "name": "Youth Business Association",
       "url": "https://youthbizassociation.github.io/yba/"
-    },
-    {
-      "@type": "ItemList",
-      "name": "YBA Programs",
-      "description": "Programs offered by Youth Business Association to help students build business skills.",
-      "itemListElement": [
-        {
-          "@type": "ListItem",
-          "position": 1,
-          "name": "Panels",
-          "description": "Hear directly from entrepreneurs, executives, and professionals as they share honest insights, career journeys, and advice for students.",
-          "url": "https://youthbizassociation.github.io/yba/programs.html"
-        },
-        {
-          "@type": "ListItem",
-          "position": 2,
-          "name": "Workshops",
-          "description": "Interactive sessions that help students practice skills like leadership, marketing, finance, communication, and teamwork.",
-          "url": "https://youthbizassociation.github.io/yba/programs.html"
-        },
-        {
-          "@type": "ListItem",
-          "position": 3,
-          "name": "Camps",
-          "description": "Immersive experiences where students dive deeper into business topics, collaborate with peers, and build confidence.",
-          "url": "https://youthbizassociation.github.io/yba/programs.html"
-        }
-      ]
     }
   ]
 }
@@ -88,69 +61,72 @@
 <body data-page="home">
 <nav aria-label="Primary">
   <a href="index.html" class="nav-logo" aria-label="Youth Business Association home">
-    <img class="brand-mark" src="images/logo-cropped.png" alt="Youth Business Association logo" width="46" height="46" decoding="async">
+    <img class="brand-mark" src="images/logo-cropped.png" alt="" width="46" height="46" decoding="async">
     <div class="nav-brand">Youth Business<br>Association</div>
   </a>
   <div class="nav-actions">
-    <button class="nav-toggle" type="button" aria-expanded="false" aria-controls="primary-nav">Menu</button>
-    <ul class="nav-links" id="primary-nav">
+    <button class="nav-toggle" type="button" aria-expanded="false" aria-controls="primary-nav" aria-label="Toggle navigation menu">
+      <div class="nav-toggle__icon" aria-hidden="true">
+        <span></span>
+        <span></span>
+        <span></span>
+      </div>
+    </button>
+    <ul class="nav-links" id="primary-nav" role="list">
       <li><a href="about.html">About</a></li>
       <li><a href="programs.html">Programs</a></li>
       <li><a href="events.html">Events</a></li>
-      <li><a href="impact.html">Impact</a></li>
+
       <li><a href="join.html" class="nav-cta">Join Us</a></li>
     </ul>
   </div>
 </nav>
 
 <main id="main-content">
+  <!-- Hero -->
   <section class="hero" id="top">
     <div class="hero-grid" aria-hidden="true"></div>
     <div class="hero-badge"><span aria-hidden="true"></span> Empowering the Next Generation of Leaders</div>
-    <h1>Where Youth <span class="grad">Business</span><br>Dreams Take Off</h1>
-    <p>Youth Business Association connects ambitious students with the tools, mentors, and opportunities they need to build real-world business skills &mdash; for free.</p>
+    <h1>Youth Business Association</h1>
+    <p class="hero-subtitle">Where Youth Business Dreams Take Off</p>
+    <p>Connecting ambitious students with the tools, mentors, and opportunities to build real-world business skills &mdash; for free.</p>
     <div class="hero-ctas">
       <a href="join.html" class="btn-primary">Join the Association</a>
       <a href="programs.html" class="btn-outline">Explore Programs</a>
     </div>
-    <div class="hero-stats" aria-label="Program highlights">
-      <div class="stat"><div class="stat-num">50+</div><div class="stat-label">Students Served</div></div>
-      <div class="stat"><div class="stat-num">30+</div><div class="stat-label">Workshops Hosted</div></div>
-      <div class="stat"><div class="stat-num">10+</div><div class="stat-label">Industry Mentors</div></div>
-      <div class="stat"><div class="stat-num">100%</div><div class="stat-label">Free to Join</div></div>
-    </div>
+
   </section>
 
+  <!-- About YBA -->
   <section class="mission">
     <div class="section-inner">
-      <div class="section-label">Our Mission</div>
       <div class="mission-grid">
         <div>
-          <h2 class="section-title">Guiding Students Toward a Business Future</h2>
-          <p class="section-sub">We believe every student deserves access to real business education &mdash; not just theory, but hands-on experiences, inspiring panels, and connections that open doors.</p>
-          <p class="mission-copy">Founded to bridge the gap between classroom learning and the business world, YBA gives students the clarity, confidence, and community they need to succeed. Every program is completely free. <a href="about.html">Learn more about our story and mission.</a></p>
-          <a href="about.html" class="btn-primary mission-cta">Learn More About YBA</a>
+          <h2 class="section-title">About YBA</h2>
+          <p class="section-sub">We help students develop entrepreneurial skills through real-world experiences, networking, and leadership opportunities &mdash; completely free.</p>
+          <p class="mission-copy">Founded to bridge the gap between classroom learning and the business world, YBA gives students the clarity, confidence, and community they need to succeed.</p>
+          <a href="about.html" class="btn-outline mission-cta">Learn More About YBA</a>
         </div>
         <div class="mission-visual reveal">
           <div class="pillars">
             <div class="pillar">
               <div class="pillar-icon" aria-hidden="true">M</div>
               <div>
-                <div class="pillar-title">Guidance &amp; Mentorship</div>
-                <div class="pillar-desc">One-on-one mentorship and career direction from real business professionals.</div>
+                <div class="pillar-title">Mentorship</div>
+                <div class="pillar-desc">One-on-one guidance and career direction from real business professionals.</div>
               </div>
             </div>
             <div class="pillar">
               <div class="pillar-icon" aria-hidden="true">P</div>
               <div>
-                <div class="pillar-title">Inspiring Panels</div>
-                <div class="pillar-desc">Live panels with entrepreneurs, executives, and industry leaders who share their journeys.</div>
+                <div class="pillar-title">Panels</div>
+                <div class="pillar-desc">Live sessions with entrepreneurs and industry leaders who share their journeys.</div>
               </div>
             </div>
             <div class="pillar">
               <div class="pillar-icon" aria-hidden="true">W</div>
               <div>
-                <div class="pillar-title">Hands-On Workshops</div>
+                <div class="pillar-title">Workshops</div>
                 <div class="pillar-desc">Practical, skill-building sessions covering marketing, finance, leadership, and more.</div>
               </div>
             </div>
@@ -167,11 +143,12 @@
     </div>
   </section>
 
+  <!-- What We Do -->
   <section>
     <div class="section-inner">
-      <div class="section-label">What We Offer</div>
+      <div class="section-label">What We Do</div>
       <h2 class="section-title">Panels, Workshops, and Camps</h2>
-      <p class="section-sub">Every offering is designed to help students explore business, build practical skills, and grow through hands-on learning and real-world guidance. <a href="programs.html">View all programs.</a></p>
+      <p class="section-sub">Every offering is designed to help students explore business, build practical skills, and grow through hands-on learning and real-world guidance.</p>
       <div class="programs-grid">
         <div class="program-card reveal">
           <span class="program-emoji" aria-hidden="true">01</span>
@@ -188,7 +165,7 @@
         <div class="program-card reveal">
           <span class="program-emoji" aria-hidden="true">03</span>
           <div class="program-title">Camps</div>
-          <div class="program-desc">Immersive experiences where students can dive deeper into business topics, collaborate with peers, and build confidence in a supportive environment.</div>
+          <div class="program-desc">Immersive experiences where students can dive deeper into business topics, collaborate with peers, and build confidence.</div>
           <span class="program-tag">Extended Programs</span>
         </div>
       </div>
@@ -198,6 +175,7 @@
     </div>
   </section>
 
+  <!-- Events -->
   <section class="events">
     <div class="section-inner">
       <div class="section-label">Events</div>
@@ -209,6 +187,7 @@
     </div>
   </section>
 
+  <!-- Social / Follow -->
   <section class="social-spotlight">
     <div class="section-inner">
       <div class="social-spotlight-copy">
@@ -225,31 +204,59 @@
     </div>
   </section>
 
-  <section>
+
+
+  <!-- Leadership -->
+  <section class="mission">
     <div class="section-inner">
-      <div class="section-label">Our Reach</div>
-      <h2 class="section-title">Our Impact</h2>
-      <p class="section-sub">Every event, every workshop, every panel is a step toward a generation of more prepared, more confident young leaders. <a href="impact.html">Read our full impact story.</a></p>
-      <div class="impact-cards">
-        <div class="impact-card reveal">
-          <div class="impact-num">50+</div>
-          <div class="impact-label">Students served across our programs</div>
-        </div>
-        <div class="impact-card reveal">
-          <div class="impact-num">30+</div>
-          <div class="impact-label">Workshops and events hosted</div>
-        </div>
-        <div class="impact-card reveal">
-          <div class="impact-num">10+</div>
-          <div class="impact-label">Professional mentors and speakers</div>
-        </div>
-        <div class="impact-card reveal">
-          <div class="impact-num">12+</div>
-          <div class="impact-label">Student-led business projects launched</div>
-        </div>
+      <div class="section-label">Leadership</div>
+      <h2 class="section-title">Meet the Team</h2>
+      <p class="section-sub">Strong youth organizations are built on visible leadership, clear values, and student leaders who know how to turn ideas into action.</p>
+      <div class="leadership-grid">
+        <article class="e-card reveal leadership-card">
+          <div class="image" aria-hidden="true"></div>
+          <div class="infotop">
+            <img src="images/logo-cropped.png" alt="Akhil, President and Media Co-Lead at Youth Business Association" class="icon leadership-logo" width="64" height="64" decoding="async" loading="lazy">
+            <div class="leadership-role">President &amp; Media Co-Lead</div>
+            <div class="name">Akhil</div>
+            <p class="leadership-summary">Helps lead YBA's overall vision while also shaping media strategy and keeping the organization's messaging clear and student-centered.</p>
+          </div>
+        </article>
+        <article class="e-card reveal leadership-card">
+          <div class="image" aria-hidden="true"></div>
+          <div class="infotop">
+            <img src="images/logo-cropped.png" alt="Rohim, Vice President and Sponsorship Lead at Youth Business Association" class="icon leadership-logo" width="64" height="64" decoding="async" loading="lazy">
+            <div class="leadership-role">Vice President &amp; Sponsorship Lead</div>
+            <div class="name">Rohim</div>
+            <p class="leadership-summary">Supports organizational leadership while leading sponsorship and grant efforts that help YBA grow its programs.</p>
+          </div>
+        </article>
+        <article class="e-card reveal leadership-card">
+          <div class="image" aria-hidden="true"></div>
+          <div class="infotop">
+            <img src="images/logo-cropped.png" alt="Karman, Web Developer and Media Co-Lead at Youth Business Association" class="icon leadership-logo" width="64" height="64" decoding="async" loading="lazy">
+            <div class="leadership-role">Web Developer &amp; Media Co-Lead</div>
+            <div class="name">Karman</div>
+            <p class="leadership-summary">Builds and maintains YBA's website while co-leading media efforts that strengthen the organization's online presence.</p>
+          </div>
+        </article>
       </div>
       <div class="section-actions">
-        <a href="impact.html" class="btn-outline">Read Our Impact Story</a>
+        <a href="about.html" class="btn-outline">Meet the Full Team</a>
+      </div>
+    </div>
+  </section>
+
+  <!-- Join YBA -->
+  <section class="join">
+    <div class="section-inner">
+      <div class="join-box">
+        <h2>Ready to Start Your Business Journey?</h2>
+        <p>Join hundreds of students already building skills, making connections, and discovering their potential. Membership is completely free.</p>
+        <div class="section-actions">
+          <a href="join.html" class="btn-primary">Join for Free &rarr;</a>
+          <a href="faq.html" class="btn-outline">Have Questions?</a>
+        </div>
       </div>
     </div>
   </section>
@@ -257,25 +264,64 @@
 
 <footer>
   <div class="footer-logo">
-    <img src="images/logo-cropped.png" alt="Youth Business Association logo" width="36" height="36" decoding="async">
+    <img src="images/logo-cropped.png" alt="" width="36" height="36" decoding="async">
     <div class="footer-brand">Youth Business Association</div>
   </div>
   <div class="footer-links">
     <a href="about.html">About</a>
     <a href="programs.html">Programs</a>
     <a href="events.html">Events</a>
-    <a href="impact.html">Impact</a>
     <a href="join.html">Join</a>
     <a href="get-involved.html">Get Involved</a>
-    <a href="donate.html">Donate</a>
     <a href="faq.html">FAQ</a>
     <a href="privacy.html">Privacy</a>
     <a href="https://www.instagram.com/youth_business.a" target="_blank" rel="noopener noreferrer">Instagram</a>
+    <a href="https://www.linkedin.com/company/youth-biz-association/" target="_blank" rel="noopener noreferrer">LinkedIn</a>
     <a href="https://discord.gg/QXCjg9n4sF" target="_blank" rel="noopener noreferrer">Discord</a>
   </div>
   <div class="footer-copy"><span id="copyright-year">2026</span> Youth Business Association &middot; Nonprofit 501(c)(3)</div>
 </footer>
 
 <script src="scripts/main.js" defer></script>
+
+<!-- Floating Discord Button -->
+<div class="discord-float" id="discordFloat" aria-label="Join our Discord server" role="complementary">
+  <a href="https://discord.gg/QXCjg9n4sF" target="_blank" rel="noopener noreferrer" class="discord-float__link" aria-label="Join YBA on Discord">
+    <div class="discord-float__light-holder" aria-hidden="true">
+      <div class="discord-float__dot"></div>
+      <div class="discord-float__light"></div>
+    </div>
+    <div class="discord-float__button-holder">
+      <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" role="img" aria-hidden="true" focusable="false">
+        <path d="M20.317 4.3698a19.7913 19.7913 0 00-4.8851-1.5152.0741.0741 0 00-.0785.0371c-.211.3753-.4447.8648-.6083 1.2495-1.8447-.2762-3.68-.2762-5.4868 0-.1636-.3933-.4058-.8742-.6177-1.2495a.077.077 0 00-.0785-.037 19.7363 19.7363 0 00-4.8852 1.515.0699.0699 0 00-.0321.0277C.5334 9.0458-.319 13.5799.0992 18.0578a.0824.0824 0 00.0312.0561c2.0528 1.5076 4.0413 2.4228 5.9929 3.0294a.0777.0777 0 00.0842-.0276c.4616-.6304.8731-1.2952 1.226-1.9942a.076.076 0 00-.0416-.1057c-.6528-.2476-1.2743-.5495-1.8722-.8923a.077.077 0 01-.0076-.1277c.1258-.0943.2517-.1923.3718-.2914a.0743.0743 0 01.0776-.0105c3.9278 1.7933 8.18 1.7933 12.0614 0a.0739.0739 0 01.0785.0095c.1202.099.246.1981.3728.2924a.077.077 0 01-.0066.1276 12.2986 12.2986 0 01-1.873.8914.0766.0766 0 00-.0407.1067c.3604.698.7719 1.3628 1.225 1.9932a.076.076 0 00.0842.0286c1.961-.6067 3.9495-1.5219 6.0023-3.0294a.077.077 0 00.0313-.0552c.5004-5.177-.8382-9.6739-3.5485-13.6604a.061.061 0 00-.0312-.0286zM8.02 15.3312c-1.1825 0-2.1569-1.0857-2.1569-2.419 0-1.3332.9555-2.4189 2.157-2.4189 1.2108 0 2.1757 1.0952 2.1568 2.419 0 1.3332-.9555 2.4189-2.1569 2.4189zm7.9748 0c-1.1825 0-2.1569-1.0857-2.1569-2.419 0-1.3332.9554-2.4189 2.1569-2.4189 1.2108 0 2.1757 1.0952 2.1568 2.419 0 1.3332-.946 2.4189-2.1568 2.4189Z"/>
+      </svg>
+      <p>Discord</p>
+    </div>
+  </a>
+</div>
+
+<script>
+(function () {
+  if (!document.body.dataset.page || document.body.dataset.page !== 'home') return;
+  var floatEl = document.getElementById('discordFloat');
+  if (!floatEl) return;
+  var THRESHOLD = 300;
+  var ticking = false;
+  function onScroll() {
+    if (!ticking) {
+      requestAnimationFrame(function () {
+        if (window.scrollY > THRESHOLD) {
+          floatEl.classList.add('is-visible');
+        } else {
+          floatEl.classList.remove('is-visible');
+        }
+        ticking = false;
+      });
+      ticking = true;
+    }
+  }
+  window.addEventListener('scroll', onScroll, { passive: true });
+})();
+</script>
 </body>
 </html>
