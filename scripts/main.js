@@ -69,10 +69,12 @@ if (navToggle && navLinks) {
 
 // Current page highlighting
 const activeMap = {
+  home: "index.html",
   about: "about.html",
   programs: "programs.html",
   events: "events.html",
-  join: "join.html"
+  join: "join.html",
+  discord: "discord.html"
 };
 
 const activeHref = activeMap[pageKey];
