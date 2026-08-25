@@ -74,7 +74,10 @@ const activeMap = {
   programs: "programs.html",
   events: "events.html",
   join: "join.html",
-  discord: "discord.html"
+  discord: "discord.html",
+  faq: "faq.html",
+  "get-involved": "get-involved.html",
+  privacy: "privacy.html"
 };
 
 const activeHref = activeMap[pageKey];
