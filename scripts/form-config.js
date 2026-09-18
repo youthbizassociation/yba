@@ -8,6 +8,6 @@
 // ============================================
 
 window.YBA_FORM_CONFIG = {
-  submitUrl: "https://script.google.com/macros/s/AKfycbxYbI5v2ZcoCWw9J9i4gTGGTbhNWooviyiD30tMPCNXX_wIYWpTEI7-sA4sl2JThI52/exec"
+  submitUrl: "https://script.google.com/macros/s/AKfycbyukVUQT6jsA74cU_bsF55LAAZgiiMrpj6mdIHL2DxmsjPaQF9GecFuNYQKTGeP4HNh/exec"
 };
 
