@@ -14,8 +14,8 @@
 //    scripts/form-config.js as FORM_SUBMIT_URL
 // ============================================
 
-const SPREADSHEET_ID = "YOUR_SPREADSHEET_ID_HERE";
-const SHEET_NAME = "YBA Signups";
+const SPREADSHEET_ID = "1PY7yV9zvdaBkrP_dMfYj0n5kWYWiHk_gxCBaliu-i7w";
+const SHEET_NAME = "YBA SIGN UP 2027";
 
 function doGet(e) {
   return ContentService.createTextOutput(
