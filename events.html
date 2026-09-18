@@ -50,8 +50,7 @@
       <li><a href="about.html">About YBA</a></li>
       <li><a href="about.html#team">Our Team</a></li>
       <li><a href="events.html">Events</a></li>
-      <li><a href="join.html">Join YBA</a></li>
-      <li><a href="discord.html">Discord</a></li>
+      <li><a href="https://discord.gg/QXCjg9n4sF" target="_blank" rel="noopener noreferrer">Discord</a></li>
       <li><a href="https://www.instagram.com/youth_business.a" target="_blank" rel="noopener noreferrer">Socials</a></li>
       <li><a href="join.html" class="nav-cta">Join YBA</a></li>
     </ul>
@@ -75,67 +74,39 @@
         <h2>See what's coming up.</h2>
       </div>
       <p class="section-sub">Check the YBA calendar for upcoming workshops, panels, events, and other opportunities. We'll add events here as they're planned.</p>
-      <div class="event-grid">
-        <article class="event-card reveal">
-          <div class="event-image">[EVENT IMAGE]</div>
-          <div class="event-content">
-            <div class="event-status">Upcoming</div>
-            <h3>[CURRENT EVENT]</h3>
-            <div class="event-meta">
-              <span>Date: [UPDATED DATE]</span>
-              <span>Location: [EVENT LOCATION]</span>
-            </div>
-            <p>YBA event details will be added here as soon as plans are finalized. This card is ready for real event announcements and registration links.</p>
-            <a href="join.html" class="btn btn-primary">Register interest</a>
-          </div>
-        </article>
-        <article class="event-card reveal">
-          <div class="event-image">[EVENT IMAGE]</div>
-          <div class="event-content">
-            <div class="event-status">Community</div>
-            <h3>[NEXT YBA ACTIVITY]</h3>
-            <div class="event-meta">
-              <span>Date: [UPDATED DATE]</span>
-              <span>Location: [COMMUNITY SPACE]</span>
-            </div>
-            <p>These activities are designed to help members connect, ask questions, and enjoy a welcoming environment built around learning and leadership.</p>
-            <a href="join.html" class="btn btn-ghost">Join the list</a>
-          </div>
-        </article>
+      <div class="empty-state">
+        <h2>Upcoming YBA Events</h2>
+        <p>New workshops, panels, and student opportunities will be posted here as they're scheduled.</p>
+        <a href="#calendar" class="btn btn-primary" style="margin-top: 1.5rem;">View YBA Calendar</a>
       </div>
     </div>
   </section>
 
-  <section class="section section--tint">
+  <section class="section section--tint" id="calendar">
     <div class="section-inner">
       <div class="section-heading center">
         <div class="eyebrow">YBA Events Calendar</div>
         <h2>Stay up to date with YBA events.</h2>
         <p>Add the YBA calendar to your own Google Calendar to never miss an event.</p>
       </div>
+      <!-- TODO: Replace with the official YBA Google Calendar embed URL -->
+      <!--
       <div class="calendar-embed reveal">
-        <div class="calendar-placeholder">
-          <p style="color: var(--muted); font-size: 0.95rem; text-align: center; padding: 2rem;">
-            <strong>Google Calendar Embed</strong><br><br>
-            Replace <code style="background: var(--blue-soft); padding: 0.2rem 0.5rem; border-radius: 4px; font-size: 0.85rem;">YOUR_GOOGLE_CALENDAR_EMBED_URL</code> below with the actual YBA Google Calendar embed URL.<br><br>
-            The embed URL should look like:<br>
-            <code style="background: var(--blue-soft); padding: 0.2rem 0.5rem; border-radius: 4px; font-size: 0.85rem;">https://calendar.google.com/calendar/embed?src=YOUR_CALENDAR_ID</code>
-          </p>
-          <!-- Replace YOUR_GOOGLE_CALENDAR_EMBED_URL with the actual embed URL -->
-          <!--
-          <iframe
-            src="YOUR_GOOGLE_CALENDAR_EMBED_URL"
-            style="border: 0; width: 100%; height: 600px; border-radius: 12px;"
-            frameborder="0"
-            scrolling="no"
-            title="YBA Events Calendar">
-          </iframe>
-          -->
-        </div>
+        <iframe
+          src="YOUR_GOOGLE_CALENDAR_EMBED_URL"
+          style="border: 0; width: 100%; height: 600px; border-radius: 12px;"
+          frameborder="0"
+          scrolling="no"
+          title="YBA Events Calendar">
+        </iframe>
       </div>
-      <div class="section-actions" style="justify-content: center; margin-top: 1.5rem;">
-        <a href="https://calendar.google.com/calendar/u/0/r?cid=YOUR_CALENDAR_ID" class="btn btn-primary" target="_blank" rel="noopener noreferrer" id="add-calendar-btn">Add to Google Calendar</a>
-        <a href="join.html" class="btn-outline">Join YBA for updates</a>
+      -->
+      <div class="calendar-embed reveal">
+        <div class="empty-state">
+          <h2>YBA Events Calendar</h2>
+          <p>Our Google Calendar will be connected soon. In the meantime, join YBA to get notified about upcoming events.</p>
+          <a href="join.html" class="btn btn-primary" style="margin-top: 1.5rem;">Join YBA for updates</a>
+        </div>
       </div>
     </div>
   </section>
