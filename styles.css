@@ -665,3 +665,118 @@ footer .footer-copy { max-width: none; margin-top: 1.5rem; padding-top: 1rem; bo
   .programs-grid { grid-template-columns: 1fr; }
   footer .footer-links { display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); }
 }
+
+/* Why Students Should Join grid */
+.why-join-grid {
+  display: grid;
+  grid-template-columns: repeat(3, minmax(0, 1fr));
+  gap: 1rem;
+}
+.why-join-card {
+  padding: 1.5rem;
+  background: var(--white);
+  border: 1px solid var(--line);
+  border-radius: var(--radius);
+  box-shadow: var(--shadow);
+  text-align: center;
+}
+.why-join-icon {
+  font-size: 2rem;
+  margin-bottom: 0.75rem;
+}
+.why-join-card h3 {
+  font-size: 1.05rem;
+}
+.why-join-card p {
+  margin-top: 0.5rem;
+  color: var(--muted);
+  font-size: 0.9rem;
+  line-height: 1.7;
+}
+@media (max-width: 900px) {
+  .why-join-grid { grid-template-columns: repeat(2, minmax(0, 1fr)); }
+}
+@media (max-width: 640px) {
+  .why-join-grid { grid-template-columns: 1fr; }
+}
+
+/* FAQ accordion */
+.faq-toggle {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  width: 100%;
+  padding: 0;
+  background: none;
+  border: none;
+  cursor: pointer;
+  text-align: left;
+}
+.faq-toggle h3 {
+  margin: 0;
+}
+.faq-icon {
+  position: relative;
+  width: 20px;
+  height: 20px;
+  flex-shrink: 0;
+  margin-left: 1rem;
+}
+.faq-icon::before,
+.faq-icon::after {
+  content: "";
+  position: absolute;
+  background: var(--muted);
+  border-radius: 2px;
+  transition: transform 200ms ease;
+}
+.faq-icon::before {
+  top: 9px;
+  left: 2px;
+  width: 16px;
+  height: 2px;
+}
+.faq-icon::after {
+  top: 2px;
+  left: 9px;
+  width: 2px;
+  height: 16px;
+}
+.faq-toggle[aria-expanded="true"] .faq-icon::after {
+  transform: rotate(90deg);
+}
+.faq-answer {
+  max-height: 0;
+  overflow: hidden;
+  transition: max-height 300ms ease;
+}
+.faq-answer p {
+  padding-top: 0.75rem;
+  color: var(--muted);
+  line-height: 1.75;
+}
+.faq-item {
+  padding: 1.35rem 1.5rem;
+}
+
+/* Calendar embed */
+.calendar-embed {
+  max-width: 900px;
+  margin: 0 auto;
+}
+.calendar-placeholder {
+  background: var(--white);
+  border: 2px dashed var(--line);
+  border-radius: 12px;
+  padding: 2rem;
+  min-height: 300px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+.calendar-placeholder code {
+  background: var(--blue-soft);
+  padding: 0.2rem 0.5rem;
+  border-radius: 4px;
+  font-size: 0.85rem;
+}

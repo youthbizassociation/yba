@@ -1,7 +1,7 @@
 {
   "name": "Youth Business Association",
   "short_name": "YBA",
-  "description": "A nonprofit helping students build real-world business skills through mentorship, workshops, and community.",
+  "description": "A free student business education program helping students learn business through workshops, panels, events, and community.",
   "start_url": "/yba/",
   "display": "standalone",
   "background_color": "#0a1628",

@@ -14,7 +14,7 @@ const joinReferralNote = document.getElementById("join-referral-note");
 const joinButton = joinForm ? joinForm.querySelector("button") : null;
 const copyrightYear = document.getElementById("copyright-year");
 const pageKey = document.body.dataset.page || "home";
-const emailConfig = window.YBA_EMAIL_CONFIG || null;
+const formConfig = window.YBA_FORM_CONFIG || null;
 const emailPattern = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
 const searchParams = new URLSearchParams(window.location.search);
 const referralName = (searchParams.get("ref_name") || "").trim();
@@ -22,9 +22,7 @@ const referralEmail = (searchParams.get("ref_email") || "").trim().toLowerCase()
 const referralEmailIsValid = emailPattern.test(referralEmail);
 const referralActive = Boolean(referralName && referralEmailIsValid);
 
-if (window.emailjs && emailConfig && emailConfig.publicKey && !emailConfig.publicKey.startsWith("YOUR_")) {
-  window.emailjs.init({ publicKey: emailConfig.publicKey });
-}
+
 
 if (copyrightYear) {
   copyrightYear.textContent = String(new Date().getFullYear());
@@ -152,73 +150,31 @@ if (joinForm && joinFirstName && joinLastName && joinGrade && joinSchool && join
     joinButton.textContent = "Submitting...";
 
     try {
-      const emailJsReady = Boolean(
-        window.emailjs &&
-        emailConfig &&
-        emailConfig.publicKey &&
-        emailConfig.serviceId &&
-        emailConfig.adminTemplateId &&
-        emailConfig.welcomeTemplateId &&
-        !emailConfig.publicKey.startsWith("YOUR_") &&
-        !emailConfig.serviceId.startsWith("YOUR_") &&
-        !emailConfig.adminTemplateId.startsWith("YOUR_") &&
-        !emailConfig.welcomeTemplateId.startsWith("YOUR_")
-      );
+      const submitUrl = formConfig && formConfig.submitUrl && !formConfig.submitUrl.startsWith("YOUR_")
+        ? formConfig.submitUrl
+        : null;
 
-      if (!emailJsReady) {
-        throw new Error("Email signup is not configured yet.");
+      if (!submitUrl) {
+        throw new Error("Form signup is not configured yet. Please try again later.");
       }
 
-      const submittedAt = new Date().toLocaleString("en-US", {
-        dateStyle: "long",
-        timeStyle: "short"
+      const payload = {
+        first_name: firstName,
+        last_name: lastName,
+        grade,
+        school,
+        state,
+        email,
+        referral_name: referralActive ? referralName : "",
+        referral_email: referralActive ? referralEmail : ""
+      };
+
+      const response = await fetch(submitUrl, {
+        method: "POST",
+        mode: "no-cors",
+        headers: { "Content-Type": "text/plain" },
+        body: JSON.stringify(payload)
       });
-
-      const emailRequests = [
-        window.emailjs.send(emailConfig.serviceId, emailConfig.adminTemplateId, {
-          admin_email: emailConfig.adminEmail || "youthbusinessassociation@outlook.com",
-          reply_to: email,
-          user_email: email,
-          user_name: `${firstName} ${lastName}`,
-          first_name: firstName,
-          last_name: lastName,
-          grade,
-          school,
-          state,
-          submitted_at: submittedAt,
-          referral_name: referralActive ? referralName : "",
-          referral_email: referralActive ? referralEmail : ""
-        }),
-        window.emailjs.send(emailConfig.serviceId, emailConfig.welcomeTemplateId, {
-          user_email: email,
-          user_name: `${firstName} ${lastName}`
-        })
-      ];
-
-      if (referralActive) {
-        emailRequests.push(
-          window.emailjs.send(emailConfig.serviceId, emailConfig.adminTemplateId, {
-            admin_email: referralEmail,
-            reply_to: email,
-            user_email: email,
-            user_name: `${firstName} ${lastName}`,
-            first_name: firstName,
-            last_name: lastName,
-            grade,
-            school,
-            state,
-            submitted_at: submittedAt,
-            referral_name,
-            referral_email
-          })
-        );
-      }
-
-      const emailResults = await Promise.all(emailRequests);
-
-      if (!emailResults.every((result) => result.status === 200)) {
-        throw new Error("We could not send your signup email right now. Please try again.");
-      }
 
       joinForm.reset();
       joinFirstName.setAttribute("aria-invalid", "false");
@@ -227,7 +183,7 @@ if (joinForm && joinFirstName && joinLastName && joinGrade && joinSchool && join
       joinSchool.setAttribute("aria-invalid", "false");
       joinState.setAttribute("aria-invalid", "false");
       joinEmail.setAttribute("aria-invalid", "false");
-      setStatus("You are all set. Please check your inbox or spam folder for our welcome email.", "success");
+      setStatus("You're all set! Your info has been submitted. We'll be in touch soon.", "success");
     } catch (error) {
       setStatus(error.message || "We could not process your signup right now. Please try again.", "error");
     } finally {
