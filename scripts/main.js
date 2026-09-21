@@ -73,8 +73,7 @@ const activeMap = {
   events: "events.html",
   join: "join.html",
   discord: "discord.html",
-  faq: "faq.html",
-  "get-involved": "get-involved.html",
+  socials: "socials.html",
   privacy: "privacy.html"
 };
 
