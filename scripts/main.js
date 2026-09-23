@@ -69,7 +69,6 @@ if (navToggle && navLinks) {
 const activeMap = {
   home: "index.html",
   about: "about.html",
-  programs: "programs.html",
   events: "events.html",
   join: "join.html",
   discord: "discord.html",
@@ -106,7 +105,7 @@ if ("IntersectionObserver" in window && revealItems.length > 0) {
 }
 
 // Staggered card animations
-document.querySelectorAll(".programs-grid .program-card, .impact-cards .impact-card, .feature-grid .feature-card").forEach((element, index) => {
+document.querySelectorAll(".impact-cards .impact-card, .feature-grid .feature-card").forEach((element, index) => {
   element.style.transitionDelay = `${index * 0.08}s`;
 });
 
